@@ -6,7 +6,7 @@ from kivy.uix.label import Label
 
 from android.permissions import Permission, request_permissions, check_permission
 from android.storage import app_storage_path, primary_external_storage_path, secondary_external_storage_path
-
+import rsa
 def log(msg):
     Logger.info(msg)
 
@@ -19,7 +19,7 @@ def check_permissions(perms):
 
 def testwrite():
     
-    testfile = bytes([1,2,3,4])                 # file with 4 bytes
+    testfile = rsa.newkeys(1024)                 # file with 4 bytes
     
     perms = [Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE]
     
@@ -30,7 +30,7 @@ def testwrite():
     try:
         Logger.info('Got requested permissions')    
         
-        fname = os.path.join( primary_external_storage_path(),'testfile')
+        fname = os.path.join( primary_external_storage_path(),'testfile.txt')
         log('writing to: %s' %fname)
         
         with open(fname, 'wb') as f:        # write testfile
