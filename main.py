@@ -34,6 +34,7 @@ def testwrite():
         log('writing to: %s' %fname)
         
         with open(fname, 'wb') as f:        # write testfile
+            Logger.info(testfile)
             f.write(testfile)
         return fname
     
